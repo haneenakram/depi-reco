@@ -5,7 +5,7 @@ name: react-project-ci
 # you can customize this as needed
 on: 
   push:
-    branches: main 
+    branches: master 
 # called scripts in travis.yml
 jobs:
   build:
