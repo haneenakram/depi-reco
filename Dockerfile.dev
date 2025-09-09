@@ -1,0 +1,16 @@
+FROM node:lts-alpine
+
+WORKDIR /app
+
+COPY package.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]
+# Use this Dockerfile for development purposes
+# It sets up a Node.js environment with necessary dependencies
+# and starts the application on port 3000.
