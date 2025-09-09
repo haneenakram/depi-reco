@@ -15,7 +15,6 @@ jobs:
     # without it the runner machine will be empty (wont see the project files)
       - name: Checkout code
         uses: actions/checkout@v2
-
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         # login to docker hub using secrets stored in github repo settings 
 
