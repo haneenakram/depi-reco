@@ -1,0 +1,30 @@
+name: react-project-ci
+# the following was not in travis.yml
+# but is needed to specify when to run the workflow
+# here we say run the workflow when we push to main branch
+# you can customize this as needed
+on: 
+  push:
+    branches: main 
+# called scripts in travis.yml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    # for checkout code from github repo to the runner machine (running workspace)
+    # without it the runner machine will be empty (wont see the project files)
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        # login to docker hub using secrets stored in github repo settings 
+
+      - name: Build Docker image
+        run: docker build -t haneenakram/react-test-ci -f Dockerfile.dev .
+
+      - name: Run tests
+        run: |
+          docker build -t haneenakram/react-test-ci -f Dockerfile.dev .
+          docker push haneenakram/react-test-ci
+        # e => environment variable make CI=true
+        # CI=true => continuous integration mode, it will run the test once and exit
+        # dont stuck in test suite waiting for more input
