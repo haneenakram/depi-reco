@@ -23,6 +23,7 @@ jobs:
 
       - name: Run tests
         run: docker run -e CI=true haneenakram/react-test-ci npm run test
+        run: docker push haneenakram/react-test-ci
         # e => environment variable make CI=true
         # CI=true => continuous integration mode, it will run the test once and exit
         # dont stuck in test suite waiting for more input
